@@ -13,7 +13,9 @@
 </head>
 <body>
 <s:property value="myLocale.displayCountry"/>
+<br>
 <s:property value="myLocale.displayLanguage"/>
+<br>
 <s:property value="message"/>
 </body>
 </html>

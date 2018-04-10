@@ -4,10 +4,54 @@
         "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
         "http://struts.apache.org/dtds/struts-2.5.dtd">
 
+
 <struts>
+
+
     <package name="default" extends="struts-default">
+
         <action name="actionSupport" class="ch04.action.UseActionSupport">
             <result>/ch04/useActionSupport.jsp</result>
         </action>
+
+        <!-- action Chain -->
+        <action name="addProductForm" class="ch04.action.ProductAction" method="addProductForm">
+            <result>/ch04/addProduct.jsp</result>
+        </action>
+        <action name="addProduct" class="ch04.action.ProductAction" method="addProduct" >
+            <interceptor-ref name="prepare"></interceptor-ref>
+            <interceptor-ref name="modelDriven"/>
+            <interceptor-ref name="params"/>
+            <result type="chain">viewProduct</result>
+        </action>
+        <action name="viewProduct" class="ch04.action.ProductAction" method="viewProduct">
+            <result>/ch04/viewProduct.jsp</result>
+        </action>
+
+        <!-- Multi Action -->
+        <action name="callMultiAction" class="ch04.action.CallMultiAction">
+            <result>/ch04/callMultiAction.jsp</result>
+        </action>
+
+        <action name="actionOne" class="ch04.action.CallMultiAction" method="actionOne">
+            <result>/ch04/actionOne.jsp</result>
+        </action>
+
+
+        <action name="actionTwo" class="ch04.action.CallMultiAction" method="actionTwo">
+            <result>/ch04/actionTwo.jsp</result>
+        </action>
+
+        <!-- 회원 가입 -->
+        <action name="RegFormAction">
+            <result>/ch04/regForm.jsp</result>
+        </action>
+        <action name="RegAction" class="ch04.action.RegAction">
+            <interceptor-ref name="prepare"/>
+            <interceptor-ref name="modelDriven"/>
+            <interceptor-ref name="params"/>
+            <result type="dispatcher">/ch04/login.jsp</result>
+        </action>
+
     </package>
 </struts>
