@@ -5,7 +5,10 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.opensymphony.xwork2.Preparable;
 
-public class ProductAction extends ActionSupport implements ModelDriven<Product>,Preparable {
+public class ProductAction extends ActionSupport implements Preparable,ModelDriven<Product>{
+
+    private Product product;
+
     @Override
     public void prepare() throws Exception {
         product = new Product();
@@ -15,8 +18,6 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
     public Product getModel() {
         return product;
     }
-
-    private Product product;
 
     public String addProductForm() throws Exception{
         return SUCCESS;

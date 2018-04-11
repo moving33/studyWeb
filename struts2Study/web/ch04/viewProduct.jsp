@@ -21,7 +21,7 @@
 
     <%--<s:bean name="ch04.model.Product" var="product"/>--%>
     <s:text name="label.product.model_no"/>&nbsp;
-    <s:property value="product"></s:property>
+    <s:property value="modelNo"></s:property>
 
 </body>
 </html>

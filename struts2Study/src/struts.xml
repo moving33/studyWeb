@@ -7,6 +7,8 @@
 
 <struts>
 
+    <constant name="struts.mapper.action.prefix.enabled" value="true"></constant>
+    <constant name="struts.url.includeParams" value="none" />
 
     <package name="default" extends="struts-default">
 
@@ -53,5 +55,92 @@
             <result type="dispatcher">/ch04/login.jsp</result>
         </action>
 
+        <!-- Dispatcher -->
+        <action name="DispatcherAction">
+            <result type="dispatcher">
+                <param name="location">/ch04/regForm.jsp</param>
+            </result>
+        </action>
+
+        <!-- ch05.회원 가입 체인예제 -->
+        <action name="UserRegForm">
+            <result>/ch05/userRegForm.jsp</result>
+        </action>
+
+        <action name="UserRegLoginAction" class="ch05.action.UserRegAction">
+            <interceptor-ref name="params"/>
+            <result name="success" type="chain">
+                <param name="actionName">LoginAction</param>
+            </result>
+        </action>
+
+        <action name="LoginAction" class="ch05.action.LoginAction">
+            <interceptor-ref name="chain"/>
+            <interceptor-ref name="params"/>
+            <result name="success">/ch05/userRegSuccess.jsp</result>
+        </action>
+
+        <!-- ch05. Dispatcher,redirect -->
+
+        <action name="LoginOne">
+            <result>/ch05/loginOne.jsp</result>
+        </action>
+
+        <action name="LoginActionOne" class="ch05.action.LoginAction">
+            <interceptor-ref name="params"/>
+            <result name="success" type="dispatcher">/ch05/loginSuccess.jsp</result>
+        </action>
+
+        <action name="LoginActionTwo" class="ch05.action.LoginAction">
+            <interceptor-ref name="params"/>
+            <result name="success" type="redirect">/ch05/loginSuccess.jsp</result>
+        </action>
+
+        <!-- ch05. action and redirect connect -->
+        <action name="MyRegForm">
+            <result>/ch05/userRegFormTwo.jsp</result>
+        </action>
+
+        <action name="UserRegAction" class="ch05.action.UserRegAction">
+            <interceptor-ref name="params"/>
+            <result name="success" type="redirectAction">
+                <param name="actionName">struts2/MyLoginAction</param>
+                <param name="userId">${userId}</param>
+                <param name="message">${message}</param>
+            </result>
+        </action>
+
+        <action name="MyLoginAction" class="ch05.action.LoginAction">
+            <interceptor-ref name="params"/>
+            <result name="success">/ch05/userRegSuccess.jsp</result>
+        </action>
+
+        <!-- Ch06. echo -->
+        <action name="echo" class="ch06.action.EchoAction">
+            <result>/ch06/echo.jsp</result>
+        </action>
+
+        <!-- Ch06. link -->
+        <action name="link">
+            <result>/ch06/link.jsp</result>
+        </action>
+        <action name="gotoLink" class="ch06.action.GotoLinkAction">
+            <result>/ch06/gotoLink.jsp</result>
+        </action>
+
+        <!-- Ch06. check box -->
+        <action name="checkCourse" class="ch06.action.CheckCourseAction">
+            <result>/ch06/checkCourse.jsp</result>
+        </action>
+
+        <!-- Ch06. Select List Type -->
+        <action name="selectCourse" class="ch06.action.SelectCourseAction">
+            <result>/ch06/selectCourse.jsp</result>
+        </action>
+
+        <!-- Ch06. list Move -->
+        <action name="movieRank" class="ch06.action.MovieRankAction">
+            <result>/ch06/movieRank.jsp</result>
+        </action>
     </package>
 </struts>

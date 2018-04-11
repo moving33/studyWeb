@@ -17,10 +17,9 @@
     제 품 등 록
     <br>
     <br>
-    <s:textfield label="%{getText('label.product.name')}" name="name" ></s:textfield>
+    <s:textfield label="%{getText('label.product.name')}" name="name"></s:textfield>
     <s:textfield label="%{getText('label.product.model_no')}" name="modelNo"></s:textfield>
     <s:submit value="등 록"/>
 </s:form>
-
 </body>
 </html>
