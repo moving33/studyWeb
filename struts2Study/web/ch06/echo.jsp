@@ -12,7 +12,6 @@
     <title>Title</title>
 </head>
 <body>
-
     <s:form action="/struts2/echo" theme="simple">
         입 력 : <s:textfield name="echo"/>
         <br>

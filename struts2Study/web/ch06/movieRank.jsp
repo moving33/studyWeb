@@ -13,14 +13,14 @@
 </head>
 <body>
 <s:label>Movie List</s:label>
-<table border="1" style="height: 200px; width: 80%">
+<table border="1" style="height: 200px; width: 35%" >
     <tr>
         <th>장르</th>
         <th>제목</th>
-        <th>순위</th>
+        <th>포스터</th>
     </tr>
     <s:iterator value="listMovie">
-        <tr>
+        <tr style="text-align: center">
             <td>
                 <s:property value="id"/>
             </td>

@@ -1,0 +1,59 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="requiredValidator">
+        <field-validator type="required">
+            <message>반드시 입력해야 합니다.</message>
+        </field-validator>
+    </field>
+
+    <field name="integerValidator">
+        <field-validator type="int">
+            <param name="min">1</param>
+            <param name="max">100</param>
+            <message>${min}~${max}사이의 정수값이어야 합니다.</message>
+        </field-validator>
+    </field>
+
+    <field name="requiredStringValidator">
+        <field-validator type="requiredstring">
+            <param name="trim">true</param>
+            <message>반드시 입력해야 하며 문자열 값이어야 합니다.</message>
+        </field-validator>
+    </field>
+
+    <field name="emailValidator">
+        <field-validator type="email">
+            <message>이메일 형식 이어야 합니다.</message>
+        </field-validator>
+    </field>
+
+    <field name="urlValidator">
+        <field-validator type="url">
+            <message>URL 값이어야 합니다.</message>
+        </field-validator>
+    </field>
+
+    <field name="stringLengthValidator">
+        <field-validator type="stringlength">
+            <param name="maxLength">12</param>
+            <param name="minLength">5</param>
+            <param name="trim">true</param>
+            <message>${minLength}글자이상${maxLength}글자 이하이어야 합니다.</message>
+        </field-validator>
+    </field>
+
+    <field name="regexValidator">
+        <field-validator type="regex">
+            <param name="regex"><![CDATA[([aAbBcCdD][123][eEfFgG][456])]]></param>
+            <message>숫자나 영어만 가능합니다.</message>
+        </field-validator>
+    </field>
+
+    <field name="fieldExpressionValidator">
+        <field-validator type="fieldexpression">
+            <param name="expression">(fieldExpressionValidator == requiredValidator)</param>
+            <message>requiredValidator와 같은 값이어야 합니다.</message>
+        </field-validator>
+    </field>
+</validators>

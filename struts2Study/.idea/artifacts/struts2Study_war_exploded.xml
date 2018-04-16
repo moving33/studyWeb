@@ -9,6 +9,8 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="lib" />
+          <element id="library" level="application" name="lib" />
+          <element id="library" level="project" name="lib1" />
         </element>
       </element>
     </root>

@@ -10,7 +10,28 @@
     <constant name="struts.mapper.action.prefix.enabled" value="true"></constant>
     <constant name="struts.url.includeParams" value="none" />
 
-    <package name="default" extends="struts-default">
+    <package name="default" extends="struts-default" namespace="/">
+        <result-types>
+            <result-type name="chart" class="net.sf.jasperreports.engine.JasperReport"></result-type>
+            <result-type name="jasper" class=""></result-type>
+        </result-types>
+
+        <action name="goStudentReport">
+            <result>/Reports/index.jsp</result>
+        </action>
+
+        <action name="StudentReport" class="ch08.action.ReportAction">
+            <result type="jasper" name="success">
+                <param name="location">/ch08/jasper/StudentReport.pdf</param>
+                <param name="resultSetDataSource">resultSetDataSource</param>
+                <param name="format">PDF</param>
+            </result>
+
+        </action>
+
+        <action name="indexAction">
+            <result>/index.jsp</result>
+        </action>
 
         <action name="actionSupport" class="ch04.action.UseActionSupport">
             <result>/ch04/useActionSupport.jsp</result>
@@ -20,12 +41,14 @@
         <action name="addProductForm" class="ch04.action.ProductAction" method="addProductForm">
             <result>/ch04/addProduct.jsp</result>
         </action>
+
         <action name="addProduct" class="ch04.action.ProductAction" method="addProduct" >
             <interceptor-ref name="prepare"></interceptor-ref>
             <interceptor-ref name="modelDriven"/>
             <interceptor-ref name="params"/>
             <result type="chain">viewProduct</result>
         </action>
+
         <action name="viewProduct" class="ch04.action.ProductAction" method="viewProduct">
             <result>/ch04/viewProduct.jsp</result>
         </action>
@@ -138,9 +161,101 @@
             <result>/ch06/selectCourse.jsp</result>
         </action>
 
-        <!-- Ch06. list Move -->
+        <!-- Ch06. list Movie -->
         <action name="movieRank" class="ch06.action.MovieRankAction">
             <result>/ch06/movieRank.jsp</result>
         </action>
+
+        <!-- Ch06. Append List -->
+        <action name="appendList" class="ch06.action.AppendListAction">
+            <result>/ch06/appendList.jsp</result>
+        </action>
+
+
+        <!-- Ch07 . File Upload -->
+        <action name="goSingleUpload">
+            <result>/ch07/singleUpload.jsp</result>
+        </action>
+        <action name="singleUpload" class="ch07.action.SingleUploadAction">
+            <result>/ch07/singleUploadResult.jsp</result>
+            <result name="input">/ch07/singleUpload.jsp</result>
+        </action>
+
+        <!-- Ch07. File Array upload -->
+        <action name="goMultiUpload">
+            <result>/ch07/multiUploadArray.jsp</result>
+        </action>
+        <action name="multiUploadArray" class="ch07.action.MultiUploadArryAction">
+            <result>/ch07/multiUploadResult.jsp</result>
+        </action>
+
+        <!-- Ch07. file List upload -->
+        <action name="goMultiList">
+            <result>/ch07/multiUploadList.jsp</result>
+        </action>
+        <action name="multiUploadList" class="ch07.action.MultiUploadListAction">
+            <result>/ch07/multiUploadResult.jsp</result>
+        </action>
+
+        <!-- ch07. file Download -->
+        <action name="fileList" class="ch07.action.FileListAction">
+            <result>/ch07/fileList.jsp</result>
+        </action>
+        <action name="fileDownload" class="ch07.action.FileDownloadAction">
+            <result type="stream">
+                <param name="contentType">binary/octet-stream</param>
+                <param name="contentLength">${contentLength}</param>
+                <param name="contentDisposition">${contentDisposition}</param>
+                <param name="bufferSize">4096</param>
+            </result>
+        </action>
+
+        <!-- ch07 . validation Example -->
+        <action name="goQuiz">
+            <result>/ch07/quiz.jsp</result>
+        </action>
+        <action name="quiz" class="ch07.action.QuizAction">
+            <result>/ch07/quiz.jsp</result>
+            <result name="input">/ch07/quiz.jsp</result>
+        </action>
+
+        <action name="goQuizClient">
+            <result>/ch07/quizClient.jsp</result>
+        </action>
+
+        <action name="quizClient" class="ch07.action.QuizAction">
+            <result>/ch07/quizClient.jsp</result>
+            <result name="input">/ch07/quizClient.jsp</result>
+        </action>
+
+        <!-- ch07 . validator Ex -->
+        <action name="goFieldValidator">
+            <result>/ch07/fieldValidator.jsp</result>
+        </action>
+
+        <action name="fieldValidator" class="ch07.action.FieldValidationAction">
+            <result>/ch07/fieldValidator.jsp</result>
+            <result name="input">/ch07/fieldValidator.jsp</result>
+        </action>
+
+        <!-- Ch07 . nonFieldValidator -->
+        <action name="goNonFieldValidator">
+            <result>/ch07/nonFieldValidator.jsp</result>
+        </action>
+
+        <action name="nonFieldValidator" class="ch07.action.NonFieldValidatorAction">
+            <result>/ch07/nonFieldValidator.jsp</result>
+            <result name="input">/ch07/nonFieldValidator.jsp</result>
+        </action>
+
+        <!-- ch08 . JFreeChart -->
+        <action name="visitChart" class="ch08.action.VisitChartAction">
+            <result type="chart">
+                <param name="width">400</param>
+                <param name="height">300</param>
+            </result>
+        </action>
+
     </package>
+
 </struts>

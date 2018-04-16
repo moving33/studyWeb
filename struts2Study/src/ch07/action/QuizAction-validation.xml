@@ -1,0 +1,16 @@
+<!DOCTYPE validators PUBLIC "-//Apache Struts//XWork Validator 1.0.3//EN"
+        "http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+<validators>
+    <field name="name">
+        <field-validator type="requiredstring">
+            <message>이름을 반드시 입력해야 합니다.</message>
+        </field-validator>
+    </field>
+    <field name="age">
+        <field-validator type="int">
+            <param name="min">15</param>
+            <param name="max">40</param>
+            <message>15-40 세 만이 퀴즈에 응모 할수 있습니다.</message>
+        </field-validator>
+    </field>
+</validators>
