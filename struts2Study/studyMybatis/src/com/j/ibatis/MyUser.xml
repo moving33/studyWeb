@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap
+        PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="myUser">
+
+    <typeAlias alias="userS" type="com.j.ibatis.MyUser"/>
+
+    <resultMap id="UserResult" class="userS">
+        <result property="id" column="ID"/>
+        <result property="pass" column="PASS"/>
+        <result property="name" column="NAME"/>
+        <result property="age" column="AGE"/>
+    </resultMap>
+    <!-- select -->
+    <select id="selectUserById" parameterClass="String" resultClass="userS">
+    select ID as id,PASS as pass,NAME as name,AGE as age from myuser where ID = #id#
+    </select>
+
+    <select id="selectAllUsers" resultClass="userS">
+        select * from myuser
+    </select>
+
+    <!-- insert -->
+    <insert id="insertUser" parameterClass="userS" >
+        insert into myuser (ID, PASS, NAME, AGE) values (#id#,#pass#,#name#,#age#)
+    </insert>
+
+    <!-- update -->
+    <update id="updateUser" parameterClass="userS">
+        update myuser set PASS = #pass# , Name = #name# , AGE = #age# where ID = #id#
+    </update>
+
+    <!-- delete -->
+    <delete id="deleteUserById" parameterClass="String">
+        delete from myuser where id = #id#
+    </delete>
+</sqlMap>
