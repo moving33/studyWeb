@@ -1,3 +1,11 @@
+/*
+
+ 단순히 Counting 기능을 담고 있는 객체
+ ConnectionMaker interface 의 method를 Override 했지만,
+ 실질적인 Logic 부분은 위 class의 member인 ConnectionMaker 가 수행한다.
+ */
+
+
 package com.j.ch13.model;
 
 import java.sql.Connection;

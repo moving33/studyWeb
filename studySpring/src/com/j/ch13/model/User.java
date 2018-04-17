@@ -1,3 +1,8 @@
+/*
+    MODEL 객체 ,
+    DataBase에 생성한 Table data와 일치한다.
+
+*/
 package com.j.ch13.model;
 
 public class User {

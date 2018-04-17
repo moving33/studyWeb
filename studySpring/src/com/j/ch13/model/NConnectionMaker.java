@@ -1,3 +1,7 @@
+/*
+ DB와 연결하여 Connection 객체를 리턴해주는 클래스
+ */
+
 package com.j.ch13.model;
 
 import java.sql.Connection;

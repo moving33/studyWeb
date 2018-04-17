@@ -1,3 +1,5 @@
+/* 확장 기능을 위한 InterFace */
+
 package com.j.ch13.model;
 
 import java.sql.Connection;
