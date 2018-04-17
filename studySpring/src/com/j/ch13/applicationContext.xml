@@ -6,7 +6,9 @@
     <bean id="connectionMaker" class="com.j.ch13.model.NConnectionMaker"></bean>
 
     <bean id="countingConnectionMaker" class="com.j.ch13.model.CountingConnectionMaker">
+        <!--property name 은 위 bean 의 member 를 의미하며 ref 는 참조할 값 (넣어줄 값) 을 의미 , value 는 직접 값을 넣어준다.-->
         <property name="realConnectionMaker" ref="connectionMaker" />
+        <property name="count" value="3"></property>
     </bean>
 
     <bean id="userDAO" class="com.j.ch13.dao.UserDAO">
