@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p ="http://www.springframework.org/schema/p"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <bean id="connectionMaker" class="com.j.ch13.model.NConnectionMaker"></bean>
@@ -11,8 +12,8 @@
         <property name="count" value="3"></property>
     </bean>
 
-    <bean id="userDAO" class="com.j.ch13.dao.UserDAO">
-        <property name="connectionMaker" ref="countingConnectionMaker"/>
+    <!-- p tag를 사용해서 속성을 주입시키는 방식 -->
+    <bean id="userDAO" class="com.j.ch13.dao.UserDAO" p:connectionMaker-ref="countingConnectionMaker">
     </bean>
 
     <bean id="dataSource"
