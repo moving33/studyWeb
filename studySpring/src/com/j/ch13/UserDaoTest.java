@@ -16,7 +16,7 @@ public class UserDaoTest {
 
         //로딩한 xml 에서 정의 되어있는 Bean객체 불러오기 getBean(" 정의한 id " , "반환할 Class Type")
         UserDAO userDAO = context.getBean("userDAO", UserDAO.class);
-        User userOne = new User("TEST10","J","1234");
+        User userOne = new User("TEST11","J","1234");
         userDAO.add(userOne);
         System.out.println(userOne.getId()+" 등록 성공...");
 

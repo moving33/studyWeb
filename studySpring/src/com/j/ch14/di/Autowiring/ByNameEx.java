@@ -7,8 +7,6 @@ public class ByNameEx {
         ClassPathXmlApplicationContext context =
                 new ClassPathXmlApplicationContext("/com/j/ch14/di/Autowiring/applicationContext.xml");
         Customer customer = (Customer)context.getBean("customer");
-
-
         System.out.println(customer.getAddress().getFulladdress());
 
     }
