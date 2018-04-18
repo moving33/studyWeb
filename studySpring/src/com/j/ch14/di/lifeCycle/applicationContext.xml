@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       xmlns:p="http://www.springframework.org/schema/p">
+
+    <bean id="myLifeBean" class="com.j.ch14.di.lifeCycle.MyLifeBeanImpl" init-method="init"
+        p:greeting="HELLO"/>
+
+    <!-- BeanPostProcessor interface를 구현한 class  -->
+    <bean class="com.j.ch14.di.lifeCycle.CustomBeanPostProc"/>
+
+</beans>
