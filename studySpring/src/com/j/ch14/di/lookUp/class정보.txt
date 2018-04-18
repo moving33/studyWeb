@@ -1,0 +1,4 @@
+applicationContext.xml : 설정정보
+PizzaShop : abstract class
+Pizza : abtract Class인 PizzaShop에 설정된 abstract method에서 리턴받을 객체
+SpringLookupMethodEx : 실행 class
