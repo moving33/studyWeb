@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--직접 설정 방식-->
+    <bean id="cutomer2" class="com.j.ch14.di.Autowiring.Customer">
+        <property name="address" ref="address"></property>
+    </bean>
+
+    <!-- autowire = "byname" 방식-->
+    <bean id="customer" class="com.j.ch14.di.Autowiring.Customer" autowire="byName"/>
+
+    <bean id="address" class="com.j.ch14.di.Autowiring.Address">
+        <property name="fulladdress" value="왕십리 어딘가 환기가 필요한..."></property>
+    </bean>
+
+
+</beans>
