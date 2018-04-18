@@ -15,5 +15,18 @@
         <property name="fulladdress" value="왕십리 어딘가 환기가 필요한..."></property>
     </bean>
 
+    <!-- 부모 Bean의 상속을 통한 설정 재사용 방식 -->
+
+    <bean name="myMonitor" class="com.j.ch14.di.Autowiring.SystemMonitor" abstract="true">
+        <property name="periodTime" value="10"/>
+        <property name="sender" value="smsSender"/>
+    </bean>
+
+    <bean id="roomMonitor" parent="myMonitor"/>
+    <bean id="doorMonitor" parent="myMonitor">
+        <property name="sender" value="phoneSender"/>
+    </bean>
+
+
 
 </beans>
