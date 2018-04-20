@@ -3,6 +3,7 @@ package com.j.ch15.model;
 public class Article {
     private int id; // 글의 id번호
     private ArticleDAO articleDAO;
+
     public Article(){
     }
 
@@ -20,5 +21,10 @@ public class Article {
 
     public void setArticleDAO(ArticleDAO articleDAO) {
         this.articleDAO = articleDAO;
+    }
+
+    @Override
+    public String toString() {
+        return "Article 객체의 hashCode : "+hashCode();
     }
 }

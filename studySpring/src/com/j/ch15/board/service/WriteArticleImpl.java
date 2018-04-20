@@ -1,9 +1,10 @@
-package com.j.ch15.model.board.service;
+package com.j.ch15.board.service;
 
 import com.j.ch15.model.Article;
 import com.j.ch15.model.ArticleDAO;
 
 public class WriteArticleImpl implements WriteArticleService{
+
     private ArticleDAO articleDAO;
 
 
@@ -16,6 +17,7 @@ public class WriteArticleImpl implements WriteArticleService{
 
     @Override
     public void write(Article article) {
+        System.out.println("WriteArticleImpl : wirte() method ...");
 
     }
 }

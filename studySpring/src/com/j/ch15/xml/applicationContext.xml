@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+    <!-- Advice Class Bean으로 등록 -->
+    <bean id="performanceTraceAdvice" class="com.j.ch15.aop.ProfilingAdvice"/>
+
+    <!-- Aspect 설정 : Advice 를 어떤 Pointcut에 적용할지 설정 -->
+
+    <aop:config>
+        <aop:aspect id="traceAspect1" ref="performanceTraceAdvice">
+            <aop:pointcut id="publicMehtod" expression="execution(public * com.j.ch15.board.service..*(..))"/>
+            <aop:around pointcut-ref="publicMehtod" method="trace" />
+        </aop:aspect>
+
+        <aop:aspect id="traceAspect2" ref="performanceTraceAdvice">
+            <aop:around pointcut="execution(public * com.j.ch15.member.service..*(..))" method="trace"/>
+        </aop:aspect>
+
+    </aop:config>
+
+    <bean id="writeArticleService" class="com.j.ch15.board.service.WriteArticleImpl">
+        <constructor-arg ref="articleDAO"/>
+    </bean>
+
+    <bean id="articleDAO" class="com.j.ch15.model.OracleArticleDAO" />
+
+    <bean id="memberService" class="com.j.ch15.member.service.MemberServiceImpl" />
+</beans>

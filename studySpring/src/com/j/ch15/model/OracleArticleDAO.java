@@ -1,4 +1,4 @@
-package com.j.ch15.model.board.service;
+package com.j.ch15.model;
 
 import com.j.ch15.model.Article;
 import com.j.ch15.model.ArticleDAO;
