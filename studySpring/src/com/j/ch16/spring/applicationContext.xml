@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <context:component-scan base-package="com.j.ch16.spring.*"/>
+
+    <bean id="logging" class="com.j.ch16.spring.aop.TestMethod"/>
+
+    <bean id="BasicDataSource"
+          class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close"
+          p:driverClassName="com.mysql.jdbc.Driver"
+          p:url="jdbc:mysql://192.168.137.128:3306/jsptest"
+          p:username="moving33"
+    p:password="1234"/>
+
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager" autowire="byType"
+    />
+
+
+    <bean id="jdbcTemplateSource" class="org.springframework.jdbc.core.JdbcTemplate" autowire="byType"
+    />
+
+    <bean id="jdbcTemplateGuestMessageDao" class="com.j.ch16.spring.dao.JdbcTemplateGuestMessageDao" autowire="byType"/>
+
+
+    <aop:config>
+        <aop:pointcut id="publicBefore"
+                      expression="execution( * com.j.ch16.spring..*.*(..))"/>
+
+        <aop:aspect ref="logging">
+            <aop:before method="testMethod" pointcut-ref="publicBefore" />
+        </aop:aspect>
+    </aop:config>
+</beans>

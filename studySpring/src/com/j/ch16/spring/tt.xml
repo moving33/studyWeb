@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <bean id="logging" class="com.j.ch16.spring.aop.TestMethod"/>
+
+    <context:component-scan base-package="com.j.ch16.spring.*"/>
+
+    <aop:config>
+        <aop:aspect ref="logging" order="0">
+            <aop:before method="testMethod" pointcut="execution(* com.j.ch16.spring..*.*(..))"/>
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="BasicDataSource"/>
+
+    <bean id="jdbcTemplateSource" class="org.springframework.jdbc.core.JdbcTemplate" p:dataSource-ref="BasicDataSource"/>
+
+    <bean id="jdbcTemplateGuestMessageDao" class="com.j.ch16.spring.dao.JdbcTemplateGuestMessageDao"
+          p:jdbcTemplate-ref="jdbcTemplateSource"/>
+
+    <bean id="BasicDataSource"
+          class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close"
+          p:driverClassName="com.mysql.jdbc.Driver"
+          p:url="jdbc:mysql://192.168.137.128:3306/jsptest"
+          p:username="moving33"
+          p:password="1234"/>
+</beans>
