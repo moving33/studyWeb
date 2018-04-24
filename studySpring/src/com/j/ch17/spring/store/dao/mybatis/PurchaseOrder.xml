@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.j.ch17.spring.store.dao.mybatis.PurchaseOrder">
+    <select id="nextVal" resultType="Integer">
+        select Max(PURCHASE_ORDER_ID) from purchase_order
+    </select>
+
+    <insert id="insert" parameterType="com.j.ch17.spring.store.model.PurchaseOrder">
+        insert into purchase_order(ITEM_ID, PAYMENT_INFO_ID, ADDRESS)
+        values (#{itemId},#{paymentInfoId},#{address})
+    </insert>
+</mapper>

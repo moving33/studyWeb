@@ -1,0 +1,76 @@
+1.DB TABLE 작성
+
+- 아이템 테이블
+
+CREATE table ITEM(
+  ITEM_ID int(5) primary key auto_increment,
+  ITEM_NAME varchar(20),
+  PRICE int(5) not null
+);
+
+- 내용넣기
+insert into ITEM (ITEM_NAME, PRICE) values ('LG 2018 GRAM',50000);
+insert into ITEM (ITEM_NAME, PRICE) values ('ViewSync Monitor',30000);
+insert into ITEM (ITEM_NAME, PRICE) values ('SAMSUNG SSD 256G',10000);
+
+-결제 정보 테이블
+create table PAYMENT_INFO(
+  PAYMENT_INFO_ID int(5) auto_increment primary key ,
+  PRICE int(5) not null
+);
+
+-주문 정보 테이블
+create table PURCHASE_ORDER(
+  PURCHASE_ORDER_ID int(5) not null auto_increment primary key ,
+  ITEM_ID int(5) not null ,
+  PAYMENT_INFO_ID int(5) not null ,
+  ADDRESS varchar(20) not null
+);
+
+2. Model class 작성
+
+ - 기본 모델 : item(아이템), PaymentInfo(결제정보) , PurchaseOrder(주문정보)
+ - 예외 처리 : ItemNotFoundException(아이템을 찾지못할경우의 사용자 정의 예외)
+ - 구매 Part : PurchaseOrderRequest(구매주문요구사항) , PurchaseOrderResult (구매주문결과저장)
+
+3. 각각 모델에 대한 DAO interface 작성
+
+ - Item : ItemDao (findById) - id를 주면 item을 리턴하는
+ - PaymentInfo : PaymentInfoDao (insert) - 결제정보를 db에 넣는
+ - PurchaseOrder : PurchaseOrderDao (insert) - 주문정보를 db에 넣는
+
+4. 구매서비스를 추상화한 인터페이스 작성
+ - PlaceOrderService.java : param으로 PurchaseOrderRequest 받고
+                            리턴값으로 PurchaseOrderResult 내뱉는 녀석
+                            구매요청이 오면 결과를 리턴하는 인터페이스
+
+5.Mybatis 연동을 위한 설정
+
+ - mybatis-config.xml 작성 sqlMap resource를 담은 파일들의 위치값 설정
+
+    config.xml에서 작성한 mapper들을 구현(DB Query문이 있는 sqlMap 작성 )하는 xml작성
+
+       -Item.xml
+       -PaymentInfo.xml
+       -PurchaseOrder.xml
+
+ - Spring 과 myBatis의 핵심연동모듈인 SqlSessionTemplate 를 사용해서 DAO Interface 구현 클래스 생성
+
+        MyBatisItemDao.java
+        MyBatisPaymentInfoDao.java
+        MyBatisPurchaseOrder.java
+
+ - 구매서비스 구현 클래스 작성
+
+6. Spring <applicationContext.xml 작성>
+
+  - transactionMybatis.xml
+
+7. 실습을 위한 test Class 작성
+
+  - ApplicationTest.java
+
+
+
+
+

@@ -61,5 +61,13 @@ public class Main {
         for(GuestMessage msg2 : list){
             System.out.println(msg2.toString());
         }
+
+
+        System.out.println("\n---------------------\n NamedParmeter로 수행");
+        GuestMessageDao dao2 = (GuestMessageDao) context.getBean("namedParamGuestMessageDao");
+        dao2.select(1,count);
+        for(GuestMessage msg2 : list){
+            System.out.println(msg2.toString());
+        }
     }
 }

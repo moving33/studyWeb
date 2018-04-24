@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.j.ch17.spring.store.dao.mybatis.Item">
+    <resultMap id="itemResultMap" type="com.j.ch17.spring.store.model.Item">
+        <result property="id" column="ITEM_ID" jdbcType="INTEGER"/>
+        <result property="name" column="ITEM_NAME" jdbcType="VARCHAR"/>
+        <result property="price" column="PRICE" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="findById" resultMap="itemResultMap" parameterType="java.lang.Integer">
+        select * from item where ITEM_ID = #{value}
+    </select>
+
+    <select id="itemList" resultMap="itemResultMap">
+        select * from item;
+    </select>
+</mapper>

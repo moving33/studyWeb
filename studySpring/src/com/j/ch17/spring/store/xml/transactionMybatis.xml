@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <!--spring에서 transaction을 담당하는 녀석 생성-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <!-- dataSource -->
+    <bean id="DataSource"
+          class="org.apache.commons.dbcp2.BasicDataSource"
+          destroy-method="close"
+          p:driverClassName="com.mysql.jdbc.Driver"
+          p:url="jdbc:mysql://192.168.137.128:3306/jsptest"
+          p:username="moving33"
+          p:password="1234"/>
+    <!-- transactionManager 에게 데이타소스 주입 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+          p:dataSource-ref="DataSource" />
+
+    <!-- query문 세션을만드는 공장에게 데이타소스 주입,매핑된 xml의 주소값 위치 주입 -->
+    <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean"
+            p:dataSource-ref="DataSource"
+            p:configLocation="classpath:com/j/ch17/mybatis-config.xml"/>
+    <!-- sqlSessionTemplate(myBatis와의 연동을 위한 핵심 모듈)을 생성 , 세션공장주입 -->
+    <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>
+    </bean>
+
+    <!-- DAO 구현 클래스 beans 설정 -->
+    <bean id="itemDao" class="com.j.ch17.spring.store.dao.mybatis.MyBatisItemDao"
+          p:sqlSessionTemplate-ref="sqlSessionTemplate"/>
+    <bean id="paymentInfoDao" class="com.j.ch17.spring.store.dao.mybatis.MyBatisPaymentInfoDao"
+          p:sqlSessionTemplate-ref="sqlSessionTemplate"/>
+    <bean id="purchaseOrderDao" class="com.j.ch17.spring.store.dao.mybatis.MyBatisPurchaseOrder"
+          p:sqlSessionTemplate-ref="sqlSessionTemplate"/>
+
+    <!--  Service 구현 클래스 설정 -->
+    <bean id="placeOrderService" class="com.j.ch17.spring.store.service.MyBatisOrderServiceImpl"
+          p:itemDao-ref="itemDao"
+          p:paymentInfoDao-ref="paymentInfoDao"
+          p:purchaseOrderDao-ref="purchaseOrderDao"
+          />
+</beans>

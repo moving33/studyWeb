@@ -20,12 +20,11 @@ public class JdbcTemplateGuestMessageDao implements GuestMessageDao{
 
     @Override
     public List<GuestMessage> select(int begin, int end) {
-        /*return jdbcTemplate.query(
+        return jdbcTemplate.query(
                 "select * from GUESTBOOK_MESSAGE limit ?,?",
                 new Object[]{begin-1,new Integer(5)},
                 new GuestMessageRowMapper()
-        );*/
-        return null;
+        );
     }
 
     @Override

@@ -2,7 +2,20 @@
 <module type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/com/j/ch14/di/lifeCycle/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/src/com/j/ch14/di/lookUp/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/src/com/j/ch15/xml/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/src/com/j/ch16/spring/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/src/com/j/ch16/spring/tt.xml</file>
+          <file>file://$MODULE_DIR$/src/com/j/ch14/di/annotation/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/src/com/j/ch15/xml/applicationContextSchema.xml</file>
+          <file>file://$MODULE_DIR$/src/com/j/ch15/xml/applicationContextAnnotation.xml</file>
+          <file>file://$MODULE_DIR$/src/com/j/ch13/applicationContext.xml</file>
+          <file>file://$MODULE_DIR$/src/com/j/ch14/di/Autowiring/applicationContext.xml</file>
+        </fileset>
+      </configuration>
     </facet>
   </component>
   <component name="NewModuleRootManager" inherit-compiler-output="true">

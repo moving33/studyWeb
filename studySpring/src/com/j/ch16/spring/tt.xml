@@ -24,10 +24,19 @@
     <bean id="transactionManager"
           class="org.springframework.jdbc.datasource.DataSourceTransactionManager" p:dataSource-ref="BasicDataSource"/>
 
-    <bean id="jdbcTemplateSource" class="org.springframework.jdbc.core.JdbcTemplate" p:dataSource-ref="BasicDataSource"/>
+    <bean id="jdbcTemplateSource" class="org.springframework.jdbc.core.JdbcTemplate"
+          p:dataSource-ref="BasicDataSource"/>
 
     <bean id="jdbcTemplateGuestMessageDao" class="com.j.ch16.spring.dao.JdbcTemplateGuestMessageDao"
           p:jdbcTemplate-ref="jdbcTemplateSource"/>
+
+    <bean id="jdbcNamedParam" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+        <constructor-arg ref="BasicDataSource"></constructor-arg>
+    </bean>
+
+
+    <!--<bean id="namedParamGuestMessageDao" class="com.j.ch16.spring.dao.NamedParamGuestMessageDao"
+          p:namedParameterJdbcTemplate-ref="jdbcNamedParam"/>-->
 
     <bean id="BasicDataSource"
           class="org.apache.commons.dbcp2.BasicDataSource"
