@@ -25,7 +25,8 @@
     <!-- query문 세션을만드는 공장에게 데이타소스 주입,매핑된 xml의 주소값 위치 주입 -->
     <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean"
             p:dataSource-ref="DataSource"
-            p:configLocation="classpath:com/j/ch17/mybatis-config.xml"/>
+            p:configLocation="classpath:com/j/ch17/spring/store/xml/mybatis-config.xml"/>
+
     <!-- sqlSessionTemplate(myBatis와의 연동을 위한 핵심 모듈)을 생성 , 세션공장주입 -->
     <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactoryBean"/>

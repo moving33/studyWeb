@@ -14,7 +14,7 @@ public class ApplicationTest {
     private PlaceOrderService placeOrderService;
     private List<Item> itemList;
 
-    //생성자 <주문서비스객체를 Spring Container에서 가져옴>
+    //생성자 <주문서비스객체를 Spring Container에서 가져옴
     public ApplicationTest() {
         ClassPathXmlApplicationContext
                 context = new ClassPathXmlApplicationContext(
@@ -49,6 +49,7 @@ public class ApplicationTest {
         ApplicationTest test = new ApplicationTest();
         Scanner scanner = new Scanner(System.in);
         System.out.println("--------------ITEM LIST ------------");
+
         test.setItemList(test.getPlaceOrderService().listAll());
         for (Item item : test.getItemList()) {
             System.out.println(item.toString());

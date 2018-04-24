@@ -9,7 +9,8 @@ public class MyBatisPurchaseOrder implements PurchaseOrderDao {
 
     public Integer nextVal(){
         String stmt = "com.j.ch17.spring.store.dao.mybatis.PurchaseOrder.nextVal";
-        return (Integer)sqlSessionTemplate.selectOne(stmt);
+        return (Integer)(sqlSessionTemplate.selectOne(stmt) != null ?
+                sqlSessionTemplate.selectOne(stmt) : 0);
     }
 
     @Override

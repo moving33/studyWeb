@@ -19,7 +19,8 @@ public class MyBatisPaymentInfoDao implements PaymentInfoDao {
 
     public Integer nextVal() {
         String stmt = "com.j.ch17.spring.store.dao.mybatis.PaymentInfo.nextVal";
-        return (Integer)sqlSessionTemplate.selectOne(stmt);
+        return (Integer)(sqlSessionTemplate.selectOne(stmt) != null ?
+                sqlSessionTemplate.selectOne(stmt) : 0 );
     }
 
 

@@ -1,4 +1,4 @@
-1.DB TABLE 작성
+1.DB TABLE 작성 (MySQL 기반)
 
 - 아이템 테이블
 
@@ -27,46 +27,52 @@ create table PURCHASE_ORDER(
   ADDRESS varchar(20) not null
 );
 
-2. Model class 작성
+2. Model class 작성(com.j.ch17.spring.store.model)
 
  - 기본 모델 : item(아이템), PaymentInfo(결제정보) , PurchaseOrder(주문정보)
  - 예외 처리 : ItemNotFoundException(아이템을 찾지못할경우의 사용자 정의 예외)
  - 구매 Part : PurchaseOrderRequest(구매주문요구사항) , PurchaseOrderResult (구매주문결과저장)
 
-3. 각각 모델에 대한 DAO interface 작성
+3. 각각 모델에 대한 DAO interface 작성 (com.j.ch17.spring.store.dao.inter)
 
- - Item : ItemDao (findById) - id를 주면 item을 리턴하는
- - PaymentInfo : PaymentInfoDao (insert) - 결제정보를 db에 넣는
- - PurchaseOrder : PurchaseOrderDao (insert) - 주문정보를 db에 넣는
+ - Item : ItemDao.java (findById) - id를 주면 item을 리턴하는
+                       (itemList) - 전체 리스트 반환
+ - PaymentInfo : PaymentInfoDao.java (insert)   - 결제정보를 db에 넣는
 
-4. 구매서비스를 추상화한 인터페이스 작성
+
+ - PurchaseOrder : PurchaseOrderDao.java (insert) - 주문정보를 db에 넣는
+
+4. 구매서비스를 추상화한 인터페이스 작성 (com.j.ch17.spring.store.service)
  - PlaceOrderService.java : param으로 PurchaseOrderRequest 받고
                             리턴값으로 PurchaseOrderResult 내뱉는 녀석
                             구매요청이 오면 결과를 리턴하는 인터페이스
 
 5.Mybatis 연동을 위한 설정
 
- - mybatis-config.xml 작성 sqlMap resource를 담은 파일들의 위치값 설정
+ - mybatis-config.xml 작성 sqlMap resource를 담은 파일들의 위치값 설정 (com.j.ch17.spring.store.xml)
 
-    config.xml에서 작성한 mapper들을 구현(DB Query문이 있는 sqlMap 작성 )하는 xml작성
+    config.xml에서 작성한 mapper들을 구현 (DB Query문이 있는 sqlMap 작성) 하는 xml작성 (com.j.ch17.spring.store.dao.mybatis)
 
        -Item.xml
        -PaymentInfo.xml
        -PurchaseOrder.xml
 
- - Spring 과 myBatis의 핵심연동모듈인 SqlSessionTemplate 를 사용해서 DAO Interface 구현 클래스 생성
+ - Spring 과 myBatis의 핵심연동모듈인 SqlSessionTemplate 를 사용해서 DAO Interface 구현 클래스 생성 (com.j.ch17.spring.store.dao.mybatis)
 
         MyBatisItemDao.java
         MyBatisPaymentInfoDao.java
         MyBatisPurchaseOrder.java
 
- - 구매서비스 구현 클래스 작성
+ - 구매서비스 구현 클래스 작성  (com.j.ch17.spring.store.service)
 
-6. Spring <applicationContext.xml 작성>
+        MyBatisOrderServiceImpl.java
+
+
+6. Spring <applicationContext.xml 작성> (com.j.ch17.spring.store.xml)
 
   - transactionMybatis.xml
 
-7. 실습을 위한 test Class 작성
+7. 실습을 위한 test Class 작성 (com.j.ch17.spring.store.test)
 
   - ApplicationTest.java
 

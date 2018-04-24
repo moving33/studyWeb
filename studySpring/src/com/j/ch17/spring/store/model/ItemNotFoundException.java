@@ -8,7 +8,7 @@ public class ItemNotFoundException extends RuntimeException{
     private Integer itemId;
 
     public ItemNotFoundException(Integer itemId) {
-        super("not found item : id"+itemId);
+        super("not found item : id "+itemId+" is no exist...");
         this.itemId = itemId;
     }
 
