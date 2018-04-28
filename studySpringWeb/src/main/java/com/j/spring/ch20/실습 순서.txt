@@ -1,0 +1,41 @@
+root Package = com.j.spring.ch20
+
+1.로깅 관련 Interface , 구현객체 작성 ({root Package}.common) -> 패키지 위치
+
+    - CommonLogger(i).java = i는 인터페이스를 의미
+        : void log(String message)
+
+    - CommonLoggerImpl.java = 구현객체
+
+
+2. 예외 Class , Command Class 작성 (커맨드 클래스는 VO 모델 객체를 의미)
+
+   위치 : service
+
+    - AuthenicationException.java  = 예외 클래스 (인증에러시 예외발생시키는 예외클래스)
+
+   위치 : model
+
+    - LoginCommand.java =  로그인모델
+
+3. 로그인 인증 인터페이스/구현객체 작성
+
+    .service
+    - Authenticator.java = 인증 인터페이스
+        void authenticate(..) : 로그인모델이 들어오면 검증하는 기능
+
+    - AuthenticatorImpl.java = 구현객체
+
+4. validation.properties 파일 작성 ( 예외처리시 처리할 문장 저장 )
+
+5. Validator를 상속받은 검증용 클래스 작성
+
+
+
+
+
+
+
+
+
+
