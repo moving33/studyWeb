@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.dao.board">
+    <resultMap id="BoardResult" type="com.j.spring.board.model.BoardVO">
+        <result property="num" column="NUM"  />
+        <result property="writer" column="WRITER" />
+        <result property="email" column="EMAIL" />
+        <result property="subject" column="SUBJECT" />
+        <result property="pass" column="PASS" />
+        <result property="readcount" column="READCOUNT" />
+        <result property="content" column="CONTENT" />
+        <result property="regdate" column="REGDATE" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--전체 글수 -->
+    <select id="getAllCount"  resultType="Integer">
+        select count(*) from boardmvc
+    </select>
+
+</mapper>
