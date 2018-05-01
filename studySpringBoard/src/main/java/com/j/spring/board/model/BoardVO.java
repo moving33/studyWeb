@@ -13,6 +13,9 @@ public class BoardVO {
     private String article_type;
     private Timestamp regdate;
 
+    public BoardVO() {
+    }
+
     public Timestamp getRegdate() {
         return regdate;
     }
@@ -85,6 +88,8 @@ public class BoardVO {
         this.article_type = article_type;
     }
 
+
+
     @Override
     public String toString() {
         return "BoardVO{" +
@@ -96,6 +101,7 @@ public class BoardVO {
                 ", readcount=" + readcount +
                 ", content='" + content + '\'' +
                 ", article_type='" + article_type + '\'' +
-                '}';
+                ", regdate=" + regdate
+                +" }";
     }
 }

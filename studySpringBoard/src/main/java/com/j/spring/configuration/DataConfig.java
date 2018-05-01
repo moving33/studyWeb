@@ -35,7 +35,6 @@ public class DataConfig {
         dataSource.setUrl(env.getRequiredProperty("jdbc.url"));
         dataSource.setUsername(env.getRequiredProperty("jdbc.username"));
         dataSource.setPassword(env.getProperty("jdbc.password"));
-        System.out.println("dataSource....!!!!!!!");
         return dataSource;
     }
 
