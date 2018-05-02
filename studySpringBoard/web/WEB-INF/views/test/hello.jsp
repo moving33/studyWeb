@@ -26,10 +26,14 @@
 <c:forEach var="vo" items="${list}">
     <tr>
         <td>
-            ${vo.num}&nbsp;&nbsp;${vo.subject}&nbsp;&nbsp;${vo.content}&nbsp;&nbsp;${vo.regdate}
+            ${vo.num}&nbsp;&nbsp;${vo.subject}&nbsp;&nbsp;${vo.writer}&nbsp;&nbsp;${vo.content}&nbsp;&nbsp;${vo.regdate}
         </td>
     </tr>
 </c:forEach>
+
+<h1>
+    ${test}
+</h1>
 
 </body>
 </html>

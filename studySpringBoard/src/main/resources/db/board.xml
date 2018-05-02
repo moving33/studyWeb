@@ -11,7 +11,6 @@
         <result property="readcount" column="READCOUNT"/>
         <result property="content" column="CONTENT"/>
         <result property="regdate" column="REGDATE" jdbcType="TIMESTAMP"/>
-
     </resultMap>
 
     <!--전체 글수 : 검색 (ALL) -->
@@ -37,7 +36,7 @@
         </choose>
     </select>
 
-    <!--List(목록보기) -->
+    <!--List(목록보기) :전체 -->
 
     <select id="getList" parameterType="java.util.Map" resultMap="BoardResult" >
         <![CDATA[
@@ -57,7 +56,93 @@
         ]]>
     </select>
 
+    <!--List(목록보기) : 검색(All) -->
+    <select id="getAllList" parameterType="java.util.Map" resultMap="BoardResult" >
+        <![CDATA[
+        SELECT * FROM (SELECT @rownum := @rownum + 1 AS rownum,
+        num,
+        writer,
+        pass,
+        email,
+        subject,
+        content,
+        regdate,
+        readcount
+          FROM (SELECT @rownum := 0)dummy,
+               (SELECT * FROM BOARDMVC
+                WHERE writer = #{search_text} or
+                      SUBJECT like CONCAT('%',#{search_text},'%') or
+                      CONTENT like CONCAT('%',#{search_text},'%')
+               ORDER BY NUM DESC)rootMVC
+          where (@rownum := 0) = 0)rnumMVC
+          where rownum >= #{startRow} and rownum <= #{endRow}
+        ]]>
+    </select>
+
+    <!-- List(목록보기) : 검색(writer) -->
+    <select id="getWriterList" parameterType="java.util.Map" resultMap="BoardResult">
+         <![CDATA[
+        SELECT * FROM (SELECT @rownum := @rownum + 1 AS rownum,
+        num,
+        writer,
+        pass,
+        email,
+        subject,
+        content,
+        regdate,
+        readcount
+          FROM (SELECT @rownum := 0)dummy,
+               (SELECT * FROM BOARDMVC WHERE writer = #{search_text} ORDER BY NUM DESC)rootMVC
+          where (@rownum := 0) = 0)rnumMVC
+          where rownum >= #{startRow} and rownum <= #{endRow}
+        ]]>
+
+    </select>
+
+    <!-- List(목록보기) : 검색(subject) -->
+    <select id="getSubjectList" parameterType="java.util.Map" resultMap="BoardResult">
+         <![CDATA[
+        SELECT * FROM (SELECT @rownum := @rownum + 1 AS rownum,
+        num,
+        writer,
+        pass,
+        email,
+        subject,
+        content,
+        regdate,
+        readcount
+          FROM (SELECT @rownum := 0)dummy,
+               (SELECT * FROM BOARDMVC WHERE SUBJECT like CONCAT('%',#{search_text},'%') ORDER BY NUM DESC)rootMVC
+          where (@rownum := 0) = 0)rnumMVC
+          where rownum >= #{startRow} and rownum <= #{endRow}
+        ]]>
+
+    </select>
+
+    <!-- List(목록보기) : 검색(Content) -->
+    <select id="getContentList" parameterType="java.util.Map" resultMap="BoardResult">
+         <![CDATA[
+        SELECT * FROM (SELECT @rownum := @rownum + 1 AS rownum,
+        num,
+        writer,
+        pass,
+        email,
+        subject,
+        content,
+        regdate,
+        readcount
+          FROM (SELECT @rownum := 0)dummy,
+               (SELECT * FROM BOARDMVC WHERE CONTENT like CONCAT('%',#{search_text},'%') ORDER BY NUM DESC)rootMVC
+          where (@rownum := 0) = 0)rnumMVC
+          where rownum >= #{startRow} and rownum <= #{endRow}
+        ]]>
+    </select>
+
+
+
     <select id="testList" resultMap="BoardResult">
        select * from boardmvc
     </select>
+
+
 </mapper>

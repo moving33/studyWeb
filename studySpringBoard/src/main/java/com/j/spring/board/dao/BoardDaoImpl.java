@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -31,8 +30,25 @@ public class BoardDaoImpl implements BoardDAO<BoardVO> {
 
     @Override
     public List<BoardVO> getList(Object o) {
-        List<BoardVO> boardVo = sqlSessionTemplate.selectList("spring.dao.board.getList",o);
-        return boardVo;
+        Map<String,Object> map = new HashMap<>();
+        map = (Map<String, Object>) o;
+        List<BoardVO> boardVo = null;
+        if(map.get("search_type") == null){
+            System.out.println("aaaa");
+            return boardVo = sqlSessionTemplate.selectList("spring.dao.board.getList", o);
+        }
+
+        if(map.get("search_type").equals("all")) {
+            return boardVo = sqlSessionTemplate.selectList("spring.dao.board.getAllList", o);
+        }else if(map.get("search_type").equals("subject")){
+            return boardVo = sqlSessionTemplate.selectList("spring.dao.board.getSubjectList", o);
+        }else if(map.get("search_type").equals("content")){
+            return boardVo = sqlSessionTemplate.selectList("spring.dao.board.getContentList", o);
+        }else if(map.get("search_type").equals("writer")){
+            return boardVo = sqlSessionTemplate.selectList("spring.dao.board.getWriterList", o);
+        }else {
+            return boardVo;
+        }
     }
 
     @Override
