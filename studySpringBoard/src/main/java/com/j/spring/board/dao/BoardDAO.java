@@ -24,4 +24,7 @@ public interface BoardDAO<T>{
     //글삭제
     void deleteArticle(Integer num);
 
+    //test
+    void test();
+
 }

@@ -1,5 +1,8 @@
 package com.j.spring.board.model;
 
+
+import org.springframework.stereotype.Component;
+
 import java.sql.Timestamp;
 
 public class BoardVO {

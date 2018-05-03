@@ -17,15 +17,17 @@ public class BoardDaoImpl implements BoardDAO<BoardVO> {
 
     @Override
     public int getListCount(Object o) {
-        Map<String , Object> map = new HashMap<>();
+        Map<String , Object> map2 = new HashMap<String, Object>();
         //param Object를 amp타입으로 변환?
-        map = (Map<String, Object>)o;
+        map2 = (Map<String, Object>)o;
 
-        if(map.get("search_type").equals("all")){
+        //System.out.println(map.get("search_type"));
+
+        if(map2.get("search_type").equals("all") || map2.get("search_type") == ""){
             return sqlSessionTemplate.selectOne("spring.dao.board.getAllCount",o);
-        }else
+        }else {
             return sqlSessionTemplate.selectOne("spring.dao.board.getOptionCount",o);
-
+        }
     }
 
     @Override
@@ -33,9 +35,9 @@ public class BoardDaoImpl implements BoardDAO<BoardVO> {
         Map<String,Object> map = new HashMap<>();
         map = (Map<String, Object>) o;
         List<BoardVO> boardVo = null;
-        if(map.get("search_type") == null){
-            System.out.println("aaaa");
-            return boardVo = sqlSessionTemplate.selectList("spring.dao.board.getList", o);
+        if(map.get("search_type") == null || map.get("search_type") == ""){
+            System.out.println("실행");
+            return boardVo = sqlSessionTemplate.selectList("spring.dao.board.getList", map);
         }
 
         if(map.get("search_type").equals("all")) {
@@ -53,27 +55,51 @@ public class BoardDaoImpl implements BoardDAO<BoardVO> {
 
     @Override
     public void insertArticle(BoardVO boardVO) {
-
+        sqlSessionTemplate.insert(
+                "spring.dao.board.insertArticle",boardVO
+        );
     }
 
     @Override
     public BoardVO getArticle(Integer num) {
-        return null;
+        sqlSessionTemplate.update(
+                "spring.dao.board.upReadCount",num
+        );
+
+        return sqlSessionTemplate.selectOne(
+                "spring.dao.board.getArticle",num
+        );
+
     }
 
     @Override
     public void updateArticle(BoardVO boardVO) {
-
+        sqlSessionTemplate.update(
+                "spring.dao.board.modifyArticle",boardVO
+        );
     }
 
     @Override
     public String getPass(Integer num) {
-        return null;
+        return sqlSessionTemplate.selectOne(
+                "spring.dao.board.getPass",num
+        );
     }
 
     @Override
     public void deleteArticle(Integer num) {
+        sqlSessionTemplate.delete(
+                "spring.dao.board.deleteArticle",num
+        );
+    }
 
+    @Override
+    public void test() {
+
+        System.out.println("test");
+
+        sqlSessionTemplate.selectOne(
+                "spring.dao.board.test");
     }
 
     public SqlSessionTemplate getSqlSessionTemplate() {

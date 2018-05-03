@@ -3,10 +3,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="spring.dao.board">
     <resultMap id="BoardResult" type="com.j.spring.board.model.BoardVO">
-        <result property="num" column="NUM"/>
-        <result property="writer" column="WRITER"/>
-        <result property="email" column="EMAIL"/>
-        <result property="subject" column="SUBJECT"/>
+        <result property="num" column="NUM" />
+        <result property="writer" column="WRITER" />
+        <result property="email" column="EMAIL" />
+        <result property="subject" column="SUBJECT" />
         <result property="pass" column="PASS"/>
         <result property="readcount" column="READCOUNT"/>
         <result property="content" column="CONTENT"/>
@@ -14,14 +14,20 @@
     </resultMap>
 
     <!--전체 글수 : 검색 (ALL) -->
-    <select id="getAllCount" resultType="Integer" parameterType="java.util.Map">
+    <select id="getAllCount" resultType="java.lang.Integer" parameterType="java.util.Map">
         select count(*) from boardmvc
+        <if test="search_text != null">
         where WRITER = #{search_text} or
         SUBJECT like CONCAT('%',#{search_text},'%') or CONTENT like CONCAT('%',#{search_text},'%')
+        </if>
+        <if test="search_text != ''">
+            where WRITER = #{search_text} or
+            SUBJECT like CONCAT('%',#{search_text},'%') or CONTENT like CONCAT('%',#{search_text},'%')
+        </if>
     </select>
 
     <!--전체 글수 : 검색(!)-->
-    <select id="getOptionCount" parameterType="java.util.Map" resultType="Integer">
+    <select id="getOptionCount" parameterType="java.util.Map" resultType="java.lang.Integer">
         select count(*) from boardmvc
         <choose>
             <when test="search_type.equals('writer')">
@@ -138,11 +144,46 @@
         ]]>
     </select>
 
+    <!-- 글쓰기 -->
+    <insert id="insertArticle" parameterType="com.j.spring.board.model.BoardVO">
+        INSERT INTO boardmvc(WRITER, EMAIL, SUBJECT, PASS, REGDATE, CONTENT)
+        VALUES(#{writer},#{email},#{subject},#{pass},now(),#{content})
+    </insert>
+
+    <!-- 글보기 -->
+    <update id="upReadCount" parameterType="java.lang.Integer">
+        UPDATE boardmvc SET READCOUNT = READCOUNT+1 WHERE NUM = #{NUM}
+    </update>
+
+    <select id="getArticle" parameterType="java.lang.Integer" resultMap="BoardResult">
+        SELECT * FROM boardmvc where NUM = #{num}
+    </select>
+
+    <!-- 비밀번호 가져오기 -->
+    <select id="getPass" parameterType="java.lang.Integer" resultType= "String" >
+        SELECT PASS FROM boardmvc WHERE NUM=#{num}
+    </select>
+
+    <!--글 수정 -->
+    <update id="modifyArticle" parameterType="com.j.spring.board.model.BoardVO">
+        UPDATE boardmvc SET
+                        WRITER=#{writer},
+                        EMAIL=#{email},
+                        SUBJECT=#{subject},
+                        CONTENT=#{content}
+                        WHERE NUM=#{num}
+    </update>
+
+    <!-- 글 삭제 -->
+    <update id="deleteArticle" parameterType="java.lang.Integer">
+        DELETE from boardmvc WHERE num=#{num}
+    </update>
 
 
     <select id="testList" resultMap="BoardResult">
        select * from boardmvc
     </select>
+
 
 
 </mapper>

@@ -1,8 +1,11 @@
 package com.j.spring.board.model;
 
+import org.springframework.stereotype.Component;
+
 /**
  * 페이징처리 클래스
  * */
+@Component
 public class Paging {
     private Integer w_size; //페이지당 보여줄 글수
     private Integer p_size; //페이지번호 표시수 (= 페이지블록사이즈)

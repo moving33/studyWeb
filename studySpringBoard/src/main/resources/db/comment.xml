@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="spring.dao.comment">
+    <resultMap id="commentResult" type="com.j.spring.board.model.CommentVO">
+        <result property="comment_num" column="COMMENT_NUM"/>
+        <result property="num" column="NUM"/>
+        <result property="comment_writer" column="COMMNET_WRITER"/>
+        <result property="comment" column="COMMENTS" />
+        <result property="regdate_comment" column="REGDATE" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--코멘트 총수 가져오기-->
+    <select id="getListCount" resultType="Integer">
+        SELECT COUNT(*) FROM boardmvc_comment
+    </select>
+
+    <!-- 글 가져오기 -->
+    <select id="getList" parameterType="java.util.Map" resultMap="commentResult" >
+        <![CDATA[
+        SELECT * FROM (SELECT @rownum := @rownum + 1 AS rownum,
+        COMMENT_NUM,
+        NUM,
+        COMMENT_WRITER,
+        COMMENTS,
+        REGDATE,
+          FROM (SELECT @rownum := 0)dummyC,
+               (SELECT * FROM boardmvc_comment ORDER BY NUM DESC)rootCMVC
+          where (@rownum := 0) = 0)rnumCMVC
+          where rownum >= #{startRow} and rownum <= #{endRow}
+        ]]>
+    </select>
+
+    <!--댓글쓰기-->
+    <insert id="insertComment" parameterType="com.j.spring.board.model.CommentVO">
+        INSERT INTO boardmvc_comment (NUM, COMMENT_WRITER, COMMENTS, REGDATE)
+        INTO VALUES (
+                    #{num},
+                    #{comment_writer},
+                    #{comment},
+                    now()
+        )
+    </insert>
+
+    <!--댓글수정-->
+    <update id="modifyComment" parameterType="com.j.spring.board.model.CommentVO">
+        UPDATE boardmvc_comment
+               SET COMMENTS=#{comment},
+                   COMMENT_WRITER=#{comment_writer}
+               WHERE COMMENT_NUM = #{comment_num}
+    </update>
+
+    <!-- 댓글삭제-->
+    <delete id="deleteComment" parameterType="java.lang.Integer">
+        DELETE FROM boardmvc_comment WHERE COMMENT_NUM = #{comment_num}
+    </delete>
+
+
+
+
+</mapper>

@@ -3,6 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
     <mappers>
+        <!--게시판 Query-->
         <mapper resource="db/board.xml"/>
+        <!--댓글 Query-->
+        <!--<mapper resource="db/comment.xml"/>-->
     </mappers>
 </configuration>
