@@ -103,12 +103,13 @@
                     </td>
                         <%--제목--%>
                     <td style="text-align: left">
-                        <a href="content.do?num=${vo.num}&pageNum=${bp.cur_Page}">&nbsp;&nbsp;&nbsp;${vo.subject}</a>
+                        <a href="content.do?num=${vo.num}&pageNum=${bp.cur_Page}">&nbsp;&nbsp;&nbsp;${vo.subject}
+
+                        </a>
                     </td>
                         <%--조회수 많을때 뜨는 아이콘 --%>
-                    <c:if test="${vo.readcount > 10}">
-                        <img src="hotArticle.gif" border="0" height="16"/>
-                    </c:if>
+
+
 
                         <%-- 작성자,이메일  --%>
                     <td>
@@ -148,25 +149,21 @@
                             </li>
                         </c:if>
 
-                        <%--페이징처리 todo 페이징 앞뒤 로케이션확인--%>
+                        <%--페이징처리 --%>
 
                         <c:forEach var="counter" begin="${bp.getPage_start()}" end="${bp.getPage_end()}">
                             <c:if test="${search_text ne ''}">
                                 <li class="page-item">
-                                    <button class="page-link">
-                                        <a href="javascript:window.location='list.do?pageNum=${counter}&search_type=${search_type}&search_text=${search_text}'">
+                                    <button class="page-link" onclick="window.location='list.do?pageNum=${counter}&search_type=${search_type}&search_text=${search_text}'">
                                                 ${counter}
-                                        </a>
                                     </button>
                                 </li>
                             </c:if>
 
                             <c:if test="${search_text eq ''}">
                                 <li class="page-item">
-                                    <button class="page-link">
-                                        <a href="javascript:window.location='list.do?pageNum=${counter}">
-                                                ${counter}
-                                        </a>
+                                    <button class="page-link" onclick="window.location='list.do?pageNum=${counter}&search_type=${search_type}&search_text=${search_text}'">
+                                            ${counter}
                                     </button>
                                 </li>
                             </c:if>

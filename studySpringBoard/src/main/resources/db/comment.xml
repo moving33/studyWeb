@@ -5,14 +5,15 @@
     <resultMap id="commentResult" type="com.j.spring.board.model.CommentVO">
         <result property="comment_num" column="COMMENT_NUM"/>
         <result property="num" column="NUM"/>
-        <result property="comment_writer" column="COMMNET_WRITER"/>
+        <result property="comment_writer" column="COMMENT_WRITER"/>
         <result property="comment" column="COMMENTS" />
         <result property="regdate_comment" column="REGDATE" jdbcType="TIMESTAMP"/>
+        <result property="comment_pass" column="PASS" />
     </resultMap>
 
     <!--코멘트 총수 가져오기-->
-    <select id="getListCount" resultType="Integer">
-        SELECT COUNT(*) FROM boardmvc_comment
+    <select id="getListCount" resultType="Integer" parameterType="java.util.Map">
+        SELECT COUNT(*) FROM boardmvc_comment WHERE num=#{num}
     </select>
 
     <!-- 글 가져오기 -->
@@ -24,10 +25,11 @@
         COMMENT_WRITER,
         COMMENTS,
         REGDATE,
+        PASS
           FROM (SELECT @rownum := 0)dummyC,
-               (SELECT * FROM boardmvc_comment ORDER BY NUM DESC)rootCMVC
+               (SELECT * FROM boardmvc_comment ORDER BY COMMENT_NUM DESC)rootCMVC
           where (@rownum := 0) = 0)rnumCMVC
-          where rownum >= #{startRow} and rownum <= #{endRow}
+          where rownum >= #{startRow} and rownum <= #{endRow} and num=#{num}
         ]]>
     </select>
 
@@ -55,7 +57,10 @@
         DELETE FROM boardmvc_comment WHERE COMMENT_NUM = #{comment_num}
     </delete>
 
-
+<!--    비밀번호가져오기-->
+    <select id="getPass" parameterType="Integer" resultType="String">
+        SELECT PASS FROM boardmvc_comment WHERE PASS = #{comment_pass}
+    </select>
 
 
 </mapper>

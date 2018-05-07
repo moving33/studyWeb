@@ -29,7 +29,6 @@ public class ListController {
                                      @RequestParam(required = false) String search_type,
                                      @RequestParam(required = false) String search_text){
 
-
         if(pageNum == null || pageNum =="") pageNum = "1";
 
         //현재페이지
@@ -59,7 +58,6 @@ public class ListController {
         //페이지에서 가져올 글 설정
         map.put("startRow",paging.getWriting_Start());
         map.put("endRow",paging.getWriting_End());
-        System.out.println(paging.getWriting_Start()+"..."+paging.getWriting_End());
 
         //페이지에표시할 글 받아오기
         List<BoardVO> list = boardListService.getBoardList(map);
@@ -83,22 +81,6 @@ public class ListController {
 
         return modelAndView;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public BoardListService getBoardListService() {
         return boardListService;

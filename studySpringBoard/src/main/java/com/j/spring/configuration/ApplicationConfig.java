@@ -1,20 +1,25 @@
 package com.j.spring.configuration;
 
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.context.annotation.*;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
-import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.servlet.Filter;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
 
 @Configuration
@@ -30,7 +35,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
         configurer.enable();
     }
 
-
+    //Jackson converter
     @Bean
     public InternalResourceViewResolver viewResolver(){
         InternalResourceViewResolver resolver
@@ -40,18 +45,25 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-
-    //결과 출력시 강제로 UTF-8 로 설정
     @Bean
-    public HttpMessageConverter<String> responseBodyConverter() {
-        return new StringHttpMessageConverter(Charset.forName("UTF-8"));
+    public ViewResolver cnViewResolver(){
+        return new ContentNegotiatingViewResolver();
     }
 
+
+
+
+    //결과 출력시 강제로 UTF-8 로 설정
+   /* @Bean
+    public HttpMessageConverter<String> responseBodyConverter() {
+        return new StringHttpMessageConverter(Charset.forName("UTF-8"));
+    }*/
+/*
     @Bean
     public Filter characterEncodingFilter() {
         CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
         characterEncodingFilter.setEncoding("UTF-8");
         characterEncodingFilter.setForceEncoding(true);
         return characterEncodingFilter;
-    }
+    }*/
 }

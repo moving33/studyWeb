@@ -15,7 +15,7 @@ public class LoggerAspect {
     static String name;
     static String type;
 
-    @Around("execution(* com.j.spring.board.dao..*.*(..)) || execution(* com.j.spring.board.controller..*.*(..))")
+    @Around("execution(* com.j.spring.board.dao..*.*(..)) || execution(* com.j.spring.board.controller..*.*(..)) || execution(* com.j.spring.board.service..*.*(..))")
     public Object logPrint(ProceedingJoinPoint joinPoint)throws Throwable{
         type = joinPoint.getSignature().getDeclaringTypeName();
 

@@ -6,6 +6,6 @@
         <!--게시판 Query-->
         <mapper resource="db/board.xml"/>
         <!--댓글 Query-->
-        <!--<mapper resource="db/comment.xml"/>-->
+        <mapper resource="db/comment.xml"/>
     </mappers>
 </configuration>

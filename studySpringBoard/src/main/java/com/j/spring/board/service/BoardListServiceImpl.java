@@ -29,6 +29,7 @@ public class BoardListServiceImpl implements BoardListService<BoardVO> {
         return boardDAO;
     }
 
+
     public void setBoardDAO(BoardDAO boardDAO) {
         this.boardDAO = boardDAO;
     }

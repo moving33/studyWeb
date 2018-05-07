@@ -31,6 +31,8 @@ public class ApplicationInitializer implements WebApplicationInitializer {
 
         //DispatcherServlet설정
         rootContext.register(ApplicationConfig.class);
+        //jasonConverter 설정
+        rootContext.register(MvcConf.class);
         //Database 설정
         rootContext.register(DataConfig.class);
 

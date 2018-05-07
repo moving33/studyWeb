@@ -23,6 +23,7 @@ public class GetArticleController {
         Map<String,Object> map = new HashMap<>();
         map.put("vo",boardVO);
 
+        //댓글 가져오기
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/board/content");
         modelAndView.addAllObjects(map);
