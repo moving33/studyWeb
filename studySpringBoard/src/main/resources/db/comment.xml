@@ -16,7 +16,7 @@
         SELECT COUNT(*) FROM boardmvc_comment WHERE num=#{num}
     </select>
 
-    <!-- 글 가져오기 -->
+    <!-- 댓글 가져오기 -->
     <select id="getList" parameterType="java.util.Map" resultMap="commentResult" >
         <![CDATA[
         SELECT * FROM (SELECT @rownum := @rownum + 1 AS rownum,
@@ -35,12 +35,13 @@
 
     <!--댓글쓰기-->
     <insert id="insertComment" parameterType="com.j.spring.board.model.CommentVO">
-        INSERT INTO boardmvc_comment (NUM, COMMENT_WRITER, COMMENTS, REGDATE)
-        INTO VALUES (
+        INSERT INTO boardmvc_comment (NUM, COMMENT_WRITER, COMMENTS, REGDATE,PASS)
+        VALUES (
                     #{num},
                     #{comment_writer},
                     #{comment},
-                    now()
+                    now(),
+                    #{comment_pass}
         )
     </insert>
 

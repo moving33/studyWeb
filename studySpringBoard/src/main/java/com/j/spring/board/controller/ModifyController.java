@@ -4,10 +4,11 @@ import com.j.spring.board.model.BoardVO;
 import com.j.spring.board.service.ModifyArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,9 +17,11 @@ public class ModifyController {
     @Autowired
     private ModifyArticleService modifyArticleService;
 
-    @RequestMapping("board/modifyForm.do")
-    public ModelAndView setView(Integer num){
+   /* @RequestMapping(value="board/modifyForm.do",method = RequestMethod.GET)
+    public ModelAndView setView(@RequestParam(value = "num") Integer num){
+
         BoardVO boardVO = modifyArticleService.getArticle(num);
+        System.out.println(boardVO.toString());
 
         Map<String,Object> map = new HashMap<>();
         map.put("vo",boardVO);
@@ -27,11 +30,14 @@ public class ModifyController {
         modelAndView.setViewName("/board/updateForm");
         modelAndView.addAllObjects(map);
         return modelAndView;
-    }
+    }*/
 
-    @RequestMapping(method = RequestMethod.POST , value = "board/modifyForm.do")
-    public ModelAndView onSubmit(BoardVO boardVO){
+   /* @RequestMapping(method = RequestMethod.POST , value = "board/modifyForm.do")
+    public ModelAndView onSubmit(@ModelAttribute(value="boardVO") BoardVO boardVO, BindingResult bindingResult)throws Exception{
+
+        System.out.println("받아온 데이터 : " +boardVO.toString());
         String pass = modifyArticleService.getPass(boardVO.getNum());
+
         if(pass.equals(boardVO.getPass())){
             modifyArticleService.updateArticle(boardVO);
             return new ModelAndView("redirect:/board/list.do");
@@ -48,7 +54,7 @@ public class ModifyController {
             return modelAndView;
         }
 
-    }
+    }*/
 
 
 

@@ -20,7 +20,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="styleWrite.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/styleWrite.css"/>
 </head>
 
 <body>

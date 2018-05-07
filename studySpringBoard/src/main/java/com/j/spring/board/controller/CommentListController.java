@@ -22,7 +22,7 @@ public class CommentListController {
     private Paging paging;
 
 
-    @RequestMapping(value = "/board/comment/{paramNum}",
+    @RequestMapping(value = "/board/comment/{paramNum}.do",
                     method = RequestMethod.POST)
     public Map<String,Object> commentList(@PathVariable("paramNum") Integer num, String commentPageNum){
 
@@ -34,13 +34,11 @@ public class CommentListController {
         int pageSize = 10; //페이지당 보여줄 댓글
         int pageBlockSize = 5; // 페이지 블록의 사이즈
 
-        System.out.println(num);
 
         //해당글의 코멘트수
         int count = commentListService.getCommentListCount(num);
         System.out.println("해당게시글의 댓글수"+count);
         if(count == 0){
-
             return null;
         }
         //페이징처리 설정 사이즈,블럭사이즈,총개수,현재페이지
@@ -50,6 +48,9 @@ public class CommentListController {
         //가져올코멘트녀석들설정
         map.put("startRow",paging.getWriting_Start());
         map.put("endRow",paging.getWriting_End());
+        map.put("num",num);
+
+        System.out.println("받아올넘버: "+num+" /시작 :"+paging.getWriting_Start()+" /끝 :"+paging.getWriting_End());
 
         //표시할 페이지 받아오기  AJax에서 처리함
         List<CommentVO> list = commentListService.getCommentList(map);
@@ -61,12 +62,11 @@ public class CommentListController {
         //json에 넘길 값들 설정
         Map<String,Object> objectMap = new HashMap<>();
 
-        map.put("list",list);
-        map.put("count",count);
-        map.put("paging",paging);
-        map.put("commentPageNum",currentPage);
+        objectMap.put("list",list);
+        objectMap.put("count",count);
+        objectMap.put("paging",paging);
+        objectMap.put("commentPageNum",currentPage);
 
-        System.out.println("dddddddddddd");
         return objectMap;
     }
 }

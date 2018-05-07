@@ -14,15 +14,15 @@ public class DeleteArticleController {
     @Autowired
     private DeleteArticleService deleteArticleService;
 
-    @RequestMapping("board/deleteForm.do")
+  /*  @RequestMapping("board/deleteForm.do")
     public ModelAndView setView(Integer num){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("/board/deleteForm");
         modelAndView.addObject("num",num);
         return modelAndView;
-    }
+    }*/
 
-    @RequestMapping(value ="board/deleteForm.do" , method = RequestMethod.POST)
+    /*@RequestMapping(value ="board/deleteForm.do" , method = RequestMethod.POST)
     public ModelAndView onSubmit(Integer num, BoardVO boardVO){
         String dbPass = deleteArticleService.getPass(num);
         if(boardVO.getPass().equals(dbPass)){
@@ -39,7 +39,7 @@ public class DeleteArticleController {
             modelAndView.addObject("value","passerror");
             return modelAndView;
         }
-    }
+    }*/
 
 
     public DeleteArticleService getDeleteArticleService() {

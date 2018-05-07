@@ -20,13 +20,20 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
 
     <script>
 
     </script>
 </head>
 <body>
+
+<c:if test="${value eq 'successDelete'}">
+    <script>
+        alert("성공적으로 삭제되었습니다.");
+    </script>
+</c:if>
+
 
 <!-- Login , Query , other Nav -->
 <header class="headerTest">

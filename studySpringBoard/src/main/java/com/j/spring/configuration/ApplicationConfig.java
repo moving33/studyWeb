@@ -3,13 +3,16 @@ package com.j.spring.configuration;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.eclipse.core.resources.mapping.ResourceMappingContext;
 import org.springframework.context.annotation.*;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -35,7 +38,6 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
         configurer.enable();
     }
 
-    //Jackson converter
     @Bean
     public InternalResourceViewResolver viewResolver(){
         InternalResourceViewResolver resolver
@@ -51,13 +53,18 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter {
     }
 
 
+    //리소스핸들러 코드로 추가
+   /* @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/js/**").addResourceLocations("/resources/js/");
+    }*/
 
 
     //결과 출력시 강제로 UTF-8 로 설정
-   /* @Bean
+    @Bean
     public HttpMessageConverter<String> responseBodyConverter() {
         return new StringHttpMessageConverter(Charset.forName("UTF-8"));
-    }*/
+    }
 /*
     @Bean
     public Filter characterEncodingFilter() {

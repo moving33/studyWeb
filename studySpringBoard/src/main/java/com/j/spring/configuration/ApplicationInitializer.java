@@ -3,7 +3,6 @@ package com.j.spring.configuration;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
-import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.ServletContext;
@@ -28,7 +27,7 @@ public class ApplicationInitializer implements WebApplicationInitializer {
                 = new AnnotationConfigWebApplicationContext();
 
 
-
+        //rootContext.setConfigLocation("/applicationContext.xml");
         //DispatcherServlet설정
         rootContext.register(ApplicationConfig.class);
         //jasonConverter 설정
@@ -40,12 +39,7 @@ public class ApplicationInitializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic dispatcher
                 = container.addServlet("dispatcher",new DispatcherServlet(rootContext));
 
-
-        container.addListener(new ContextLoaderListener(rootContext));
-
-
-
-        dispatcher.addMapping("/");
+        dispatcher.addMapping("*.do");
         dispatcher.setLoadOnStartup(1);
 
     }

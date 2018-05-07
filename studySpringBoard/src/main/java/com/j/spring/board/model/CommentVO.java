@@ -2,6 +2,7 @@ package com.j.spring.board.model;
 
 import java.sql.Timestamp;
 
+
 public class CommentVO {
     private String comment_num; //코멘트의 primary key
     private Integer num; //해당 글번호

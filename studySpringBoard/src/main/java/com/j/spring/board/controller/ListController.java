@@ -3,6 +3,7 @@ package com.j.spring.board.controller;
 import com.j.spring.board.model.BoardVO;
 import com.j.spring.board.model.Paging;
 import com.j.spring.board.service.BoardListService;
+import com.j.spring.board.service.comment.CommentListService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,11 +25,11 @@ public class ListController {
     @Autowired
     private Paging paging;
 
+
     @RequestMapping("board/list.do")
     public ModelAndView modelAndView(@RequestParam(required = false) String pageNum,
                                      @RequestParam(required = false) String search_type,
                                      @RequestParam(required = false) String search_text){
-
         if(pageNum == null || pageNum =="") pageNum = "1";
 
         //현재페이지
