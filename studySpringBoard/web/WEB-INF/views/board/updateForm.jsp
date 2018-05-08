@@ -81,7 +81,11 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="content">내용</label>
-                        <input type="text" id="content" name="content" class="form-control textarea" rows="10" required style="text-align: left"/>
+<%--
+                        <input type="texta" id="content" name="content" class="form-control textarea" rows="10" required style="text-align: left"/>
+--%>
+                        <textarea id="content" name="content" class="form-control textarea" rows="10" required style="text-align: left" >
+                        </textarea>
                     </div>
                 </div>
             </div>

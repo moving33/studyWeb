@@ -46,13 +46,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <form:label  path="writer">작성자</form:label>글
-                        <form:input type="text" class="form-control" placeholder="Writer" path="writer" />
+                        <form:input type="text" class="form-control" placeholder="Writer" path="writer" required="required"/>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <form:label path="email">이메일</form:label>
-                        <form:input type="email" class="form-control" placeholder="E-mail" path="email" />
+                        <form:input type="email" class="form-control" placeholder="E-mail" path="email" required="required"/>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <form:label path="subject">제목</form:label>
-                        <form:input type="text" class="form-control"  placeholder="subject" path="subject"/>
+                        <form:input type="text" class="form-control"  placeholder="subject" path="subject" required="required"/>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <form:label path="content">내용</form:label>
-                        <form:textarea path="content" class="form-control textarea" rows="10" placeholder="Message" />
+                        <form:textarea path="content" class="form-control textarea" rows="10" placeholder="Message" required="required"/>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <form:label path="pass">비밀번호</form:label>
-                        <form:input type="password" class="form-control" name="pass" autocomplete="off" id="pass" placeholder="password" path="pass"/>
+                        <form:input type="password" class="form-control" name="pass" autocomplete="off" id="pass" placeholder="password" path="pass" required="required"/>
                     </div>
                 </div>
             </div>

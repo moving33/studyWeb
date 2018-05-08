@@ -73,6 +73,8 @@ public class ListController {
         model.put("search_type",search_type);
         model.put("pageNum",pageNum);
         model.put("bp",paging);
+        model.put("search_text",search_text);
+        model.put("search_type",search_type);
 
         //modelAndView 설정
 

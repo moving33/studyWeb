@@ -109,8 +109,8 @@
                         <c:set var="number" value="${number-1}"/>
                     </td>
                         <%--제목--%>
-                    <td style="text-align: left">
-                        <a href="content.do?num=${vo.num}&pageNum=${bp.cur_Page}">&nbsp;&nbsp;&nbsp;${vo.subject}
+                    <td style="text-align: left" >
+                        <a href="content.do?num=${vo.num}&pageNum=${bp.cur_Page}" class="subject">&nbsp;&nbsp;&nbsp;${vo.subject}
 
                         </a>
                     </td>
@@ -120,7 +120,7 @@
 
                         <%-- 작성자,이메일  --%>
                     <td>
-                        <a href="malito:${vo.email}">${vo.writer}</a>
+                        <a href="malito:${vo.email}" class="writer">${vo.writer}</a>
                     </td>
 
                     <td>
@@ -132,6 +132,10 @@
                     </td>
 
                 </tr>
+                <%--검색어 하이라이트주기
+                <script>
+                    colorForQuery();
+                </script>--%>
             </c:forEach>
         </c:if>
         </table>
@@ -200,7 +204,7 @@
 
                             <label class="radio-inline"> 검색옵션 </label>  
                             <label class="radio-inline">
-                                <input type="radio" name="search_type" value="subject" checked="checked"/> 제목
+                                <input type="radio" name="search_type" value="subject" checked="checked" /> 제목
                             </label>
                             <label class="radio-inline">
                                 <input type="radio" name="search_type" value="content"/> 내용
@@ -208,12 +212,14 @@
                             <label class="radio-inline">
                                 <input type="radio" name="search_type" value="writer"/> 작성자
                             </label>
-                            <input type="text" class="form-control" name="search_text" value=""
+                            <input type="text" class="form-control" name="search_text" value="" id="find_box"
                                    required/>
                         </div>
 
                         <div class="col-xs-2">
                             <button type="submit" class="btn btn-primary" data-toggle="" style="margin-top: 1.5%;">Search</button>
+                            <button onclick="javacript:location.href='/board/list.do';return false" class="btn btn-primary" style="margin-top: 6px;">목록보기
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -225,5 +231,43 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<%--검색색깔주기--%>
+<script>
+    jQuery.fn.highlight = function(pat) {
+        function innerHighlight(node, pat) {
+            var skip = 0;
+            if (node.nodeType == 3) {
+                var pos = node.data.toUpperCase().indexOf(pat);
+                if (pos >= 0) {
+                    var spannode = document.createElement('span');
+                    spannode.className = 'highlight';
+                    var middlebit = node.splitText(pos);
+                    var endbit = middlebit.splitText(pat.length);
+                    var middleclone = middlebit.cloneNode(true);
+                    spannode.appendChild(middleclone);
+                    middlebit.parentNode.replaceChild(spannode, middlebit);
+                    skip = 1;
+                }
+            }
+            else if (node.nodeType == 1 && node.childNodes && !/(script|style)/i.test(node.tagName)) {
+                for (var i = 0; i < node.childNodes.length; ++i) {
+                    i += innerHighlight(node.childNodes[i], pat);
+                }
+            }
+            return skip;
+        }
+        return this.length && pat && pat.length ? this.each(function() {
+            innerHighlight(this, pat.toUpperCase());
+        }) : this;
+    };
+
+
+    function colorForQuery() {
+        var query = "${search_text}";
+        var q = "${search_type}";
+        $(q).highlight(query);
+    }
+</script>
 </body>
 </html>
